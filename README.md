@@ -49,7 +49,7 @@ export LESSOPEN='|~/.lessfilter %s'
 
 ### 4. Create ~/.lessfilter
 Run [main.py](main.py) to generate the latest `.lessfilter` file and place it in your home directory.
-Or you can download a pre-generated [.lessfilter](.lessfilter) which is currently at version `2.10.0`.
+Or you can download a pre-generated [.lessfilter](.lessfilter) which is currently at version `2.12.0`.
 Check your program version by running `pygmentize -V` to ensure that it is this version or newer.
 
 ### 5. Make ~/.lessfilter executable
