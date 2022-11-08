@@ -49,14 +49,11 @@ export LESSOPEN='|~/.lessfilter %s'
 
 ### 4. Create ~/.lessfilter
 Run [main.py](main.py) to generate the latest `.lessfilter` file and place it in your home directory.
-Or you can download a pre-generated [.lessfilter](.lessfilter) which is currently at version `2.12.0`.
+Or you can download a pre-generated [.lessfilter](.lessfilter) which is currently at version `2.13.0`.
 Check your program version by running `pygmentize -V` to ensure that it is this version or newer.
 
 ### 5. Make ~/.lessfilter executable
 ```shell
 chmod +x ~/.lessfilter
 ```
-All set!  Test it out by running `less ~/.lessfilter`
-
-## Notes
-The first time `pygmentize` is run in a shell session, you'll likely experience a cold-start delay.  Subsequent invocations are much faster.
+Done.  Test it out by running `less ~/.lessfilter`
