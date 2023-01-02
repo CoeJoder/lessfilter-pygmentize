@@ -69,7 +69,7 @@ def fetch_lexers():
             for filename in filenames:
                 filename = filename.strip()
                 if '\\' not in filename:
-                    if filename.startswith('*'):
+                    if filename.startswith(r'*.'):
                         ext_values = recognized_extensions.setdefault(name, [])
                         ext_values.append(filename[1:])
                     elif filename != 'None':

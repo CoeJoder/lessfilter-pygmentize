@@ -11,17 +11,17 @@ for path in "$@"; do
             # shell lexer
             pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" -l sh "$path"
             ;;
-        .Renviron|.Rhistory|.Rprofile|.SRCINFO|.bashrc|.editorconfig|.exrc|\
-        .gvimrc|.htaccess|.kshrc|.vimrc|.zshrc|BUCK|BUILD|BUILD.bazel|\
-        CMakeLists.txt|Dockerfile|GNUmakefile|Gemfile|Kconfig*|Makefile|\
-        Makefile.*|PKGBUILD|Pipfile|Pipfile.lock|Procfile|Rakefile|SConscript|\
-        SConstruct|Singularity|Vagrantfile|WORKSPACE|apache.conf|apache2.conf|\
-        autodelegate|autohandler|bashrc|control|dhandler|exrc|external.in*|\
-        gvimrc|iddsa|idecdsa|idecdsask|ided25519|ided25519sk|idrsa|kshrc|\
-        lighttpd.conf|makefile|meson.build|mesonoptions.txt|nginx.conf|\
-        pacman.conf|poetry.lock|sources.list|squid.conf|standard-modules.in|\
-        termcap|termcap.src|terminfo|terminfo.src|todo.txt|vimrc|xorg.conf|\
-        zshrc)
+        *Config.in*|*Spec.hs|.Renviron|.Rhistory|.Rprofile|.SRCINFO|.bashrc|\
+        .editorconfig|.exrc|.gvimrc|.htaccess|.kshrc|.vimrc|.zshrc|BUCK|BUILD|\
+        BUILD.bazel|CMakeLists.txt|Dockerfile|GNUmakefile|Gemfile|Kconfig*|\
+        Makefile|Makefile.*|PKGBUILD|Pipfile|Pipfile.lock|Procfile|Rakefile|\
+        SConscript|SConstruct|Singularity|Vagrantfile|WORKSPACE|apache.conf|\
+        apache2.conf|autodelegate|autohandler|bashrc|control|dhandler|exrc|\
+        external.in*|gvimrc|iddsa|idecdsa|idecdsask|ided25519|ided25519sk|\
+        idrsa|kshrc|lighttpd.conf|makefile|meson.build|mesonoptions.txt|\
+        nginx.conf|pacman.conf|poetry.lock|sources.list|squid.conf|\
+        standard-modules.in|termcap|termcap.src|terminfo|terminfo.src|\
+        todo.txt|vimrc|xorg.conf|zshrc)
             # filename recognized
             pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" "$path"
             ;;
@@ -95,7 +95,7 @@ for path in "$@"; do
                 .xhtml.jinja2|.xi|.xm|.xmi|.xml|.xml.j2|.xml.jinja2|.xmlul4|\
                 .xpl|.xq|.xql|.xqm|.xquery|.xqy|.xsd|.xsl|.xslt|.xtend|.xtm|\
                 .xul.in|.yaml|.yaml.j2|.yaml.jinja2|.yang|.yml|.yml.j2|\
-                .yml.jinja2|.zeek|.zep|.zig|.zsh|Config.in*|Spec.hs)
+                .yml.jinja2|.zeek|.zep|.zig|.zsh)
                     # extension recognized
                     pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" "$path"
                     ;;
