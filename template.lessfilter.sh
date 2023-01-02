@@ -22,8 +22,8 @@ for path in "$@"; do
                 *)
                     # unrecognized filename/extension
                     # attempt to parse the lexer from the shebang if it exists
-                    lexer=$(head -n 1 "$path" |grep "^#\!" |awk -F" " \
-'match($1, /\/(\w*)$/, a) {if (a[1]!="env") {print a[1]} else {print $2}}')
+                    lexer=$(head -n 1 "$path" | grep '^#\!' | awk -F" " \
+'{ if (/env/) { print $2 } else { sub( /.*\//, ""); print $1;} }')
                     case "$lexer" in
                         node|nodejs)
                             # workaround for lack of Node.js lexer alias

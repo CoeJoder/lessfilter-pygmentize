@@ -2,7 +2,6 @@ from typing import List, Iterable
 
 import re
 import requests
-import os
 from lxml import html
 from lxml.html import HtmlElement
 from lxml.cssselect import CSSSelector
