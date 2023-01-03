@@ -21,7 +21,6 @@ TEMPLATE_LESSFILTER = 'template.lessfilter.sh'
 TEMPLATE_OUTPUT = '.lessfilter'
 INDENT = 4
 INDENT_DOUBLE = INDENT * 2
-INDENT_QUADRUPLE = INDENT * 4
 MAX_COL_SIZE = 80
 
 # any known shell filenames that don't have specific lexers will use the `sh` lexer
@@ -30,7 +29,6 @@ misc_shell_filenames = [".bashrc", "bash.bashrc", ".bash_aliases", ".bash_enviro
                         "zlogin", "zlogout", ".cshrc", ".cshdirs", "csh.cshrc", "csh.login", "csh.logout", ".tcshrc",
                         ".kshrc", "ksh.kshrc"]
 recognized_filenames = {}
-recognized_extensions = {}
 
 
 def main():
@@ -40,7 +38,6 @@ def main():
     print('Fetching lexers from documentation page...')
     fetch_lexers()
     print(f'  Supported filenames:\n  {recognized_filenames}')
-    print(f'  Supported extensions:\n  {recognized_extensions}')
     render_template(version)
     print(f'Done.')
 
@@ -68,18 +65,14 @@ def fetch_lexers():
             filenames: List[str] = m.group(1).split(',')
             for filename in filenames:
                 filename = filename.strip()
-                if '\\' not in filename:
-                    if filename.startswith(r'*.'):
-                        ext_values = recognized_extensions.setdefault(name, [])
-                        ext_values.append(filename[1:])
-                    elif filename != 'None':
-                        filename_values = recognized_filenames.setdefault(name, [])
-                        filename_values.append(filename)
-                        # specific lexer exists; no need to use the `sh` lexer
-                        try:
-                            misc_shell_filenames.remove(filename)
-                        except ValueError:
-                            pass
+                if filename != 'None' and '\\' not in filename:
+                    filename_values = recognized_filenames.setdefault(name, [])
+                    filename_values.append(filename)
+                    # specific lexer exists; no need to use the `sh` lexer
+                    try:
+                        misc_shell_filenames.remove(filename)
+                    except ValueError:
+                        pass
         else:
             raise Exception(f'Aborted due to an unrecognized "{name}" lexer description format: {description}')
 
@@ -92,9 +85,7 @@ def render_template(version: str):
         'misc_shell_filenames': to_bar_separated_string(chain(misc_shell_filenames),
                                                         INDENT_DOUBLE),
         'recognized_filenames': to_bar_separated_string(chain.from_iterable(recognized_filenames.values()),
-                                                        INDENT_DOUBLE),
-        'recognized_extensions': to_bar_separated_string(chain.from_iterable(recognized_extensions.values()),
-                                                         INDENT_QUADRUPLE)
+                                                        INDENT_DOUBLE)
     }
     output = template.render(**template_vars)
     output_path = PATH_PROJECT.joinpath(TEMPLATE_OUTPUT)

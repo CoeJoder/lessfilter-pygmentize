@@ -13,37 +13,26 @@ for path in "$@"; do
             pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" "$path"
             ;;
         *)
-            ext=$([[ "$filename" = *.* ]] && echo ".${filename##*.}" || echo '')
-            case "$ext" in
-                {{ recognized_extensions }})
-                    # extension recognized
-                    pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" "$path"
+            # attempt to parse the lexer from the shebang if it exists
+            lexer=$(head -n 1 "$path" | grep '^#\!' | awk -F" " \
+'{ if (/env/) { print $2 } else { sub( /.*\//, ""); print $1;} }')
+            case "$lexer" in
+                node|nodejs)
+                    # use `js` lexer for nodejs
+                    pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" \
+                        -l js "$path"
+                    ;;
+                "")
+                    # fall-back to plain text
+                    exit 1
                     ;;
                 *)
-                    # unrecognized filename/extension
-                    # attempt to parse the lexer from the shebang if it exists
-                    lexer=$(head -n 1 "$path" | grep '^#\!' | awk -F" " \
-'{ if (/env/) { print $2 } else { sub( /.*\//, ""); print $1;} }')
-                    case "$lexer" in
-                        node|nodejs)
-                            # workaround for lack of Node.js lexer alias
-                            pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" \
-                                -l js "$path"
-                            ;;
-                        "")
-                            # fall-back to plain text
-                            exit 1
-                            ;;
-                        *)
-                            # use lexer alias parsed from the shebang
-                            pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" \
-                                -l "$lexer" "$path"
-                            ;;
-                    esac
+                    # use lexer alias parsed from the shebang
+                    pygmentize -f 256 -O style="$PYGMENTIZE_STYLE" \
+                        -l "$lexer" "$path"
                     ;;
             esac
             ;;
     esac
 done
 exit 0
-
