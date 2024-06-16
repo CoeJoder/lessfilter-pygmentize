@@ -1,5 +1,6 @@
 from typing import List, Iterable
 
+import argparse
 import re
 import requests
 from lxml import html
@@ -17,8 +18,11 @@ SELECT_LEXER_NAME = CSSSelector('.sig-name')
 SELECT_HOMEPAGE_VERSION = CSSSelector('.sphinxsidebarwrapper b')
 REGEXP_FILENAMES = re.compile(r'.*?Filenames:\s+?(.+?)$', re.MULTILINE | re.DOTALL)
 PATH_PROJECT = Path(__file__).parent
-TEMPLATE_LESSFILTER = 'template.lessfilter.sh'
-TEMPLATE_OUTPUT = '.lessfilter'
+TEMPLATE_DIR = PATH_PROJECT.joinpath('templates')
+TEMPLATE_OUTPUT_LESSFILTER = '.lessfilter'
+TEMPLATE_OUTPUT_README = 'README.md'
+TEMPLATE_LESSFILTER = f'template{TEMPLATE_OUTPUT_LESSFILTER}.sh'
+TEMPLATE_README = f'template.{TEMPLATE_OUTPUT_README}'
 INDENT = 4
 INDENT_DOUBLE = INDENT * 2
 MAX_COL_SIZE = 80
@@ -67,13 +71,21 @@ recognized_filenames = {}
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--lessfilter_only', action='store_true')
+    args = parser.parse_args()
+
     print("Fetching Pygments version number from homepage...", end='')
     version = fetch_version()
     print(f'v{version}')
     print('Fetching lexers from documentation page...')
     fetch_lexers()
     print(f'  Supported filenames:\n  {recognized_filenames}')
-    render_template(version)
+
+    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
+    render_template(env, version)
+    if not args.lessfilter_only:
+        render_readme(env, version)
     print(f'Done.')
 
 
@@ -111,9 +123,18 @@ def fetch_lexers():
         else:
             raise Exception(f'Aborted due to an unrecognized "{name}" lexer description format: {description}')
 
+def render_readme(env: Environment, version: str):
+    template = env.get_template(TEMPLATE_README)
+    template_vars = {
+        'pygments_version': version
+    }
+    output = template.render(**template_vars)
+    output_path = PATH_PROJECT.joinpath(TEMPLATE_OUTPUT_README)
+    with output_path.open(mode='w', encoding='utf-8', newline='\n') as f:
+        f.write(output)
 
-def render_template(version: str):
-    env = Environment(loader=FileSystemLoader(PATH_PROJECT))
+
+def render_template(env: Environment, version: str):    
     template = env.get_template(TEMPLATE_LESSFILTER)
     template_vars = {
         'pygments_version': version,
@@ -123,7 +144,7 @@ def render_template(version: str):
                                                         INDENT_DOUBLE)
     }
     output = template.render(**template_vars)
-    output_path = PATH_PROJECT.joinpath(TEMPLATE_OUTPUT)
+    output_path = PATH_PROJECT.joinpath(TEMPLATE_OUTPUT_LESSFILTER)
     with output_path.open(mode='w', encoding='utf-8', newline='\n') as f:
         f.write(output)
     output_path.chmod(0o755)
