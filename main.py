@@ -23,11 +23,46 @@ INDENT = 4
 INDENT_DOUBLE = INDENT * 2
 MAX_COL_SIZE = 80
 
-# any known shell filenames that don't have specific lexers will use the `sh` lexer
-misc_shell_filenames = [".bashrc", "bash.bashrc", ".bash_aliases", ".bash_environment", ".bash_profile", ".bash_login",
-                        ".bash_logout", ".profile", ".zprofile", ".zshrc", ".zlogin", ".zlogout", "zprofile", "zshrc",
-                        "zlogin", "zlogout", ".cshrc", ".cshdirs", "csh.cshrc", "csh.login", "csh.logout", ".tcshrc",
-                        ".kshrc", "ksh.kshrc"]
+# for each of the following, if a specific lexer is not found, `sh` is used
+misc_shell_filenames = [
+    ".profile",
+
+    # bash
+    "bash.bashrc",
+    ".bashrc",
+    ".bash_aliases",
+    ".bash_completion",
+    ".bash_environment",
+    ".bash_history",
+    ".bash_login",
+    ".bash_logout",
+    ".bash_profile",
+
+    # zsh
+    "zlogin",
+    "zlogout",
+    "zprofile",
+    "zshrc",
+    ".zlogin",
+    ".zlogout",
+    ".zprofile",
+    ".zshrc",
+    ".zshenv",
+
+    # csh
+    "csh.cshrc",
+    "csh.login",
+    "csh.logout",
+    ".cshdirs",
+    ".cshrc",
+
+    # tcsh
+    ".tcshrc",
+
+    # ksh
+    "ksh.kshrc"
+    ".kshrc",
+]
 recognized_filenames = {}
 
 
