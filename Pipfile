@@ -12,4 +12,4 @@ cssselect = "*"
 jinja2 = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.10.12"
