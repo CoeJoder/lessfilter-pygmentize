@@ -72,7 +72,7 @@ recognized_filenames = {}
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--lessfilter_only', action='store_true')
+    parser.add_argument('--generate_readme', action='store_true')
     args = parser.parse_args()
 
     print("Fetching Pygments version number from homepage...", end='')
@@ -84,7 +84,7 @@ def main():
 
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
     render_template(env, version)
-    if not args.lessfilter_only:
+    if args.generate_readme:
         render_readme(env, version)
     print(f'Done.')
 
