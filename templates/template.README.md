@@ -39,17 +39,13 @@ export LESS='-R'
 
 # more styles available, see: `pygmentize -L styles`
 export PYGMENTIZE_STYLE='paraiso-dark'
-
-# optional
-alias ls='ls --color=always'
-alias grep='grep --color=always'
 ```
 If you opted out of `lesspipe` in the previous step, replace the above `eval` statement with:
 ```shell
 export LESSOPEN='|~/.lessfilter %s'
 ```
 
-### 4. Generate `~/.lessfilter` (optional)
+### 4. Generate `.lessfilter` (optional)
 This repo contains a pre-generated [.lessfilter](.lessfilter) which is currently at version `{{ pygments_version }}` and is updated occasionally.  You could use that and skip to the next step, even if its version lags behind that of Pygments (any unsupported file types would fallback to plain-text).
 
 You could also generate a `.lessfilter` yourself by running [main.py](main.py), which scrapes the Pygments lexer documentation website and produces a `.lessfilter` in this directory which corresponds to the latest published version:
