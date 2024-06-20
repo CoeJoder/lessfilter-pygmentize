@@ -60,9 +60,15 @@ pipenv install
 pipenv run python main.py >/dev/null
 ```
 
-### 5. Copy `~/.lessfilter` to `$HOME` and make it executable
+### 5. Copy `.lessfilter` to `$HOME` and make it executable
 ```shell
-cp ./.lessfilter ~
+# if you performed step 4, do this:
+cp .lessfilter ~
+
+# otherwise, do this:
+wget -P ~ https://github.com/CoeJoder/lessfilter-pygmentize/raw/master/.lessfilter
+
+# now make it executable
 chmod +x ~/.lessfilter
 ```
 
