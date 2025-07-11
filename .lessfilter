@@ -1,5 +1,5 @@
 #!/bin/bash
-# uses Pygments v2.18.0 for syntax highlighting on applicable file types
+# uses Pygments v2.19.2 for syntax highlighting on applicable file types
 for path in "$@"; do
     # match by known filenames
     filename=$(basename "$path")
@@ -36,56 +36,57 @@ for path in "$@"; do
         *.exw|*.ezt|*.f|*.f03|*.f90|*.factor|*.fan|*.fancypack|*.fc|*.feature|\
         *.fhtml|*.fif|*.fish|*.flo|*.flx|*.flxh|*.fnl|*.frag|*.frt|*.fs|*.fsi|\
         *.fst|*.fsti|*.fsx|*.fun|*.func|*.fut|*.fy|*.g|*.gap|*.gcode|*.gd|\
-        *.gdc|*.gemspec|*.geo|*.gi|*.go|*.golo|*.gradle|*.graph|*.graphql|\
-        *.groovy|*.gs|*.gsp|*.gsql|*.gst|*.gsx|*.gv|*.h|*.h++|*.haml|\
-        *.handlebars|*.hbs|*.hcl|*.hdp|*.hh|*.hlsl|*.hlsli|*.hpp|*.hrl|*.hs|\
-        *.hsail|*.htm|*.htm.j2|*.htm.jinja2|*.html|*.html.j2|*.html.jinja2|\
-        *.htmlul4|*.hx|*.hxml|*.hxsl|*.hxx|*.hy|*.hyb|*.i|*.i6t|*.i7x|*.icl|\
-        *.icn|*.icon|*.idc|*.idl|*.idl4|*.idr|*.ijs|*.ik|*.inc|*.inf|*.ini|\
-        *.ino|*.instances|*.intr|*.io|*.ipf|*.isa|*.j|*.jade|*.jag|*.janet|\
-        *.java|*.jbst|*.jcl|*.jdn|*.jl|*.jp|*.js|*.js.in|*.js.j2|*.js.jinja2|\
-        *.jsgf|*.jslt|*.jsm|*.json|*.jsonl|*.jsonld|*.jsonnet|*.jsp|*.jsul4|\
-        *.jsx|*.juttle|*.jy|*.k|*.kal|*.kid|*.kif|*.kk|*.kki|*.kmsg|*.kn|\
-        *.kql|*.ksh|*.kt|*.kts|*.kusto|*.lagda|*.lasso|*.lasso[89]|*.lcry|\
-        *.ldif|*.lean|*.leex|*.less|*.lgt|*.lhs|*.libsonnet|*.lid|*.lidr|\
-        *.liquid|*.lisp|*.ll|*.load|*.logtalk|*.lpad|*.ls|*.lsl|*.lsp|*.lua|\
-        *.luau|*.ly|*.m|*.m2|*.ma|*.mac|*.mak|*.man|*.mao|*.maql|*.markdown|\
-        *.mask|*.max|*.mc|*.mcfunction|*.mcschema|*.md|*.mhtml|*.mi|*.mips|\
-        *.mir|*.mjs|*.mk|*.ml|*.mli|*.mll|*.mly|*.mm|*.mo|*.mod|*.mojo|\
-        *.monkey|*.moo|*.moon|*.mos|*.mount|*.mq4|*.mq5|*.mqh|*.ms|*.msc|*.mt|\
+        *.gdc|*.gemspec|*.geo|*.gi|*.gleam|*.go|*.golo|*.googlesql|\
+        *.googlesql.sql|*.gradle|*.graph|*.graphql|*.groovy|*.gs|*.gsp|*.gsql|\
+        *.gst|*.gsx|*.gv|*.h|*.h++|*.ha|*.haml|*.handlebars|*.hbs|*.hcl|*.hdp|\
+        *.hh|*.hlsl|*.hlsli|*.hpp|*.hrl|*.hs|*.hsail|*.htm|*.htm.j2|\
+        *.htm.jinja2|*.html|*.html.j2|*.html.jinja2|*.htmlul4|*.hx|*.hxml|\
+        *.hxsl|*.hxx|*.hy|*.hyb|*.i|*.i6t|*.i7x|*.icl|*.icn|*.icon|*.idc|\
+        *.idl|*.idl4|*.idr|*.ijs|*.ik|*.inc|*.inf|*.ini|*.ino|*.instances|\
+        *.intr|*.io|*.ipf|*.isa|*.j|*.jade|*.jag|*.janet|*.java|*.jbst|*.jcl|\
+        *.jdn|*.jl|*.jp|*.js|*.js.in|*.js.j2|*.js.jinja2|*.jsgf|*.jslt|*.jsm|\
+        *.json|*.json5|*.jsonl|*.jsonld|*.jsonnet|*.jsp|*.jsul4|*.jsx|\
+        *.juttle|*.jy|*.k|*.kal|*.kid|*.kif|*.kk|*.kki|*.kmsg|*.kn|*.kql|\
+        *.ksh|*.kt|*.kts|*.kusto|*.lagda|*.lasso|*.lasso[89]|*.lcry|*.ldif|\
+        *.lean|*.leex|*.less|*.lgt|*.lhs|*.libsonnet|*.lid|*.lidr|*.liquid|\
+        *.lisp|*.ll|*.load|*.logtalk|*.lpad|*.ls|*.lsl|*.lsp|*.lua|*.luau|\
+        *.ly|*.m|*.m2|*.ma|*.mac|*.mak|*.man|*.mao|*.maql|*.markdown|*.mask|\
+        *.max|*.mc|*.mcfunction|*.mcschema|*.md|*.mhtml|*.mi|*.mips|*.mir|\
+        *.mjs|*.mk|*.ml|*.mli|*.mll|*.mly|*.mm|*.mo|*.mod|*.mojo|*.monkey|\
+        *.moo|*.moon|*.mos|*.mount|*.mpl|*.mq4|*.mq5|*.mqh|*.ms|*.msc|*.mt|\
         *.mu|*.mxml|*.myt|*.n|*.nasm|*.nb|*.nbp|*.nc|*.ncl|*.ndjson|*.ng2|\
         *.ni|*.nim|*.nimrod|*.nit|*.nix|*.nl|*.nqp|*.ns2|*.nsh|*.nsi|*.nt|\
-        *.objdump|*.objdump-intel|*.odin|*.ooc|*.opa|*.orc|*.org|*.p|*.p6|\
-        *.p6l|*.p6m|*.pack|*.pan|*.pas|*.patch|*.path|*.pc|*.pcmk|*.peg|*.pem|\
-        *.perl|*.ph|*.php|*.php[345]|*.phtml|*.pidl|*.pig|*.pike|*.pl|*.pl6|\
-        *.plot|*.plt|*.pm|*.pm6|*.pml|*.pmod|*.po|*.pony|*.portugol|*.pot|\
-        *.pov|*.pp|*.pr|*.praat|*.prg|*.prm|*.pro|*.proc|*.prolog|*.prom|\
-        *.promela|*.promql|*.properties|*.proto|*.prql|*.ps|*.ps1|*.psc|*.psi|\
-        *.psl|*.psm1|*.ptls|*.ptx|*.pug|*.pwn|*.pxd|*.pxi|*.py|*.py2tb|\
-        *.py3tb|*.pyi|*.pypylog|*.pytb|*.pyul4|*.pyw|*.pyx|*.q|*.qbs|*.qml|\
-        *.qvs|*.qvto|*.qvw|*.r|*.r3|*.rake|*.raku|*.rakudoc|*.rakumod|\
-        *.rakutest|*.rb|*.rbw|*.rbx|*.re|*.react|*.reb|*.red|*.reds|*.reg|\
-        *.rei|*.resource|*.rest|*.rex|*.rexx|*.rhtml|*.ride|*.rita|*.rkt|\
-        *.rktd|*.rktl|*.rl|*.rnc|*.robot|*.rpf|*.rq|*.rql|*.rs|*.rs.in|*.rsl|\
-        *.rss|*.rst|*.rts|*.run|*.rvt|*.rx|*.s|*.sage|*.sarl|*.sas|*.sass|\
-        *.savi|*.sbl|*.sc|*.scad|*.scala|*.scaml|*.scd|*.scdoc|*.sce|*.sci|\
-        *.scm|*.sco|*.scope|*.scss|*.sed|*.service|*.sgf|*.sh|*.sh-session|\
-        *.shell-session|*.shen|*.shex|*.sieve|*.sig|*.sil|*.siv|*.sl|*.sla|\
-        *.slice|*.slim|*.sls|*.smali|*.smithy|*.sml|*.smv|*.snbt|*.snobol|\
-        *.socket|*.sol|*.sp|*.sparql|*.spec|*.spice|*.spt|*.sql|*.sql.j2|\
-        *.sql.jinja2|*.sqlite3-console|*.ss|*.ssp|*.st|*.stan|*.sv|*.svh|\
-        *.swap|*.swg|*.swift|*.t|*.tac|*.tact|*.tal|*.tap|*.target|*.tasm|\
-        *.tcl|*.tcsh|*.tea|*.teal|*.tex|*.tf|*.thrift|*.thy|*.ti|*.tid|\
-        *.timer|*.tlb|*.tmpl|*.tnt|*.toc|*.todotxt|*.toml|*.tpl|*.tpp|\
-        *.treetop|*.ts|*.tst|*.tt|*.ttl|*.twig|*.txt|*.typ|*.typoscript|*.u|\
-        *.u1|*.u2|*.udo|*.ul4|*.usd|*.usda|*.v|*.vala|*.vapi|*.vark|*.vb|\
-        *.vbs|*.vcl|*.vert|*.vhd|*.vhdl|*.vim|*.vipgrm|*.vm|*.vp|*.vpr|*.vy|\
-        *.wast|*.wat|*.wdiff|*.webidl|*.weechatlog|*.wgsl|*.whiley|*.wlua|\
-        *.wren|*.wsdl|*.wsf|*.x|*.x10|*.x[bp]m|*.xhtml|*.xhtml.j2|\
-        *.xhtml.jinja2|*.xi|*.xm|*.xmi|*.xml|*.xml.j2|*.xml.jinja2|*.xmlul4|\
-        *.xpl|*.xpp|*.xq|*.xql|*.xqm|*.xquery|*.xqy|*.xsd|*.xsl|*.xslt|\
-        *.xtend|*.xtm|*.xul.in|*.yaml|*.yaml.j2|*.yaml.jinja2|*.yang|*.yar|\
-        *.yml|*.yml.j2|*.yml.jinja2|*.zeek|*.zep|*.zig|*.zone|*.zsh|*.🔥|\
+        *.numbair|*.objdump|*.objdump-intel|*.odin|*.ooc|*.opa|*.orc|*.org|\
+        *.p|*.p6|*.p6l|*.p6m|*.pack|*.pan|*.pas|*.patch|*.path|*.pc|*.pcmk|\
+        *.pddl|*.peg|*.pem|*.perl|*.ph|*.php|*.php[345]|*.phtml|*.pidl|*.pig|\
+        *.pike|*.pl|*.pl6|*.plot|*.plt|*.pm|*.pm6|*.pml|*.pmod|*.po|*.pony|\
+        *.portugol|*.pot|*.pov|*.pp|*.pr|*.praat|*.prg|*.prm|*.pro|*.proc|\
+        *.prolog|*.prom|*.promela|*.promql|*.properties|*.proto|*.prql|*.ps|\
+        *.ps1|*.psc|*.psi|*.psl|*.psm1|*.ptls|*.ptx|*.pug|*.pwn|*.pxd|*.pxi|\
+        *.py|*.py2tb|*.py3tb|*.pyi|*.pypylog|*.pytb|*.pyul4|*.pyw|*.pyx|*.q|\
+        *.qbs|*.ql|*.qll|*.qml|*.qvs|*.qvto|*.qvw|*.r|*.r3|*.rake|*.raku|\
+        *.rakudoc|*.rakumod|*.rakutest|*.rb|*.rbw|*.rbx|*.re|*.react|*.reb|\
+        *.red|*.reds|*.reg|*.rego|*.rei|*.resource|*.rest|*.rex|*.rexx|\
+        *.rhtml|*.ride|*.rita|*.rkt|*.rktd|*.rktl|*.rl|*.rnc|*.robot|*.rpf|\
+        *.rq|*.rql|*.rs|*.rs.in|*.rsl|*.rss|*.rst|*.rts|*.run|*.rvt|*.rx|*.s|\
+        *.sage|*.sarl|*.sas|*.sass|*.savi|*.sbl|*.sc|*.scad|*.scala|*.scaml|\
+        *.scd|*.scdoc|*.sce|*.sci|*.scm|*.sco|*.scope|*.scss|*.sed|*.service|\
+        *.sgf|*.sh|*.sh-session|*.shell-session|*.shen|*.shex|*.sieve|*.sig|\
+        *.sil|*.siv|*.sl|*.sla|*.slice|*.slim|*.sls|*.smali|*.smithy|*.sml|\
+        *.smv|*.snbt|*.snobol|*.socket|*.sol|*.sources|*.sp|*.sparql|*.spec|\
+        *.spice|*.spt|*.sql|*.sql.j2|*.sql.jinja2|*.sqlite3-console|*.ss|\
+        *.ssp|*.st|*.stan|*.sv|*.svh|*.swap|*.swg|*.swift|*.t|*.tac|*.tact|\
+        *.tal|*.tap|*.target|*.tasm|*.tcl|*.tcsh|*.td|*.tea|*.teal|*.tex|*.tf|\
+        *.thrift|*.thy|*.ti|*.tid|*.timer|*.tlb|*.tmpl|*.tnt|*.toc|*.todotxt|\
+        *.toml|*.tpl|*.tpp|*.treetop|*.ts|*.tst|*.tsx|*.tt|*.ttl|*.twig|*.txt|\
+        *.typ|*.typoscript|*.u|*.u1|*.u2|*.udo|*.ul4|*.usd|*.usda|*.v|*.vala|\
+        *.vapi|*.vark|*.vb|*.vbs|*.vcl|*.vert|*.vhd|*.vhdl|*.vim|*.vipgrm|\
+        *.vm|*.vp|*.vpr|*.vue|*.vy|*.wast|*.wat|*.wdiff|*.webidl|*.weechatlog|\
+        *.wgsl|*.whiley|*.wlua|*.wren|*.wsdl|*.wsf|*.x|*.x10|*.x[bp]m|*.xhtml|\
+        *.xhtml.j2|*.xhtml.jinja2|*.xi|*.xm|*.xmi|*.xml|*.xml.j2|*.xml.jinja2|\
+        *.xmlul4|*.xpl|*.xpp|*.xq|*.xql|*.xqm|*.xquery|*.xqy|*.xsd|*.xsl|\
+        *.xslt|*.xtend|*.xtm|*.xul.in|*.yaml|*.yaml.j2|*.yaml.jinja2|*.yang|\
+        *.yar|*.yml|*.yml.j2|*.yml.jinja2|*.zeek|*.zep|*.zig|*.zone|*.zsh|*.🔥|\
         *Config.in*|*Spec.hs|.Renviron|.Rhistory|.Rprofile|.SRCINFO|.bashrc|\
         .csl|.editorconfig|.exrc|.gvimrc|.htaccess|.kshrc|.ldaprc|.vimrc|\
         .zshrc|Android.bp|BUCK|BUILD|BUILD.bazel|CMakeLists.txt|Dockerfile|\
@@ -103,6 +104,14 @@ for path in "$@"; do
             ;;
         *)
             # attempt to parse the lexer from the shebang if it exists
+            # ensure that grep and awk are installed
+            for prog in grep awk; do
+                if ! command -v "$prog" &>/dev/null; then
+                    echo "\`$prog\` not found; unable to parse shebang" >&2
+                    # fall-back to plain text
+                    exit 1
+                fi
+            done
             lexer=$(head -n 1 "$path" | grep '^#\!' | awk -F" " \
 '{ if (/env/) { print $2 } else { sub( /.*\//, ""); print $1;} }')
             case "$lexer" in

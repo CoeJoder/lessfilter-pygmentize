@@ -14,6 +14,14 @@ for path in "$@"; do
             ;;
         *)
             # attempt to parse the lexer from the shebang if it exists
+            # ensure that grep and awk are installed
+            for prog in grep awk; do
+                if ! command -v "$prog" &>/dev/null; then
+                    echo "\`$prog\` not found; unable to parse shebang" >&2
+                    # fall-back to plain text
+                    exit 1
+                fi
+            done
             lexer=$(head -n 1 "$path" | grep '^#\!' | awk -F" " \
 '{ if (/env/) { print $2 } else { sub( /.*\//, ""); print $1;} }')
             case "$lexer" in
